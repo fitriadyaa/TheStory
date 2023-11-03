@@ -1,0 +1,29 @@
+<resources>
+    //app name
+    <string name="app_name">StoryApp</string>
+
+
+    //login and register
+    <string name="login_here">Login Here</string>
+    <string name="btn_login">Login</string>
+    <string name="email">Email</string>
+    <string name="invalid_email">Invalid email address please submit the valid email format</string>
+    <string name="password">Password</string>
+    <string name="invalid_password">Passwords must be at least 6 characters</string>
+    <string name="not_account">Didn\'t have account?</string>
+    <string name="have_account">Have account?</string>
+    <string name="register">Register Here</string>
+    <string name="login">Login Here</string>
+    <string name="btn_register">Register</string>
+    <string name="required">Required</string>
+    <string name="username">Username</string>
+    <string name="register_success">Registration Success, login first!</string>
+    <string name="register_error">Register Failed</string>
+    <string name="desc">Description</string>
+    <string name="date">18 Oktober 2023</string>
+    <string name="log_out">Log out</string>
+    <string name="more_menu">More Menu</string>
+    <string name="camera">Camera</string>
+    <string name="image">Image</string>
+    <string name="upload">Upload</string>
+</resources>

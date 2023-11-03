@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_more_menu"
+        android:icon="@drawable/ic_more_vert_24"
+        android:title="@string/more_menu"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/action_logout_menu"
+                android:icon="@drawable/ic_logout_24"
+                android:title="@string/log_out"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+</menu>
