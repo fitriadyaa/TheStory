@@ -16,7 +16,9 @@ import com.fitriadyaa.storyapp.ui.auth.AuthActivity
 import com.fitriadyaa.storyapp.utils.Preference
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private val binding : ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         checkPermissions()
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (!allPermissionsGranted()) {
-                Toast.makeText(this, "Permission not granted.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.permission), Toast.LENGTH_SHORT).show()
                 finish()
             }
         }

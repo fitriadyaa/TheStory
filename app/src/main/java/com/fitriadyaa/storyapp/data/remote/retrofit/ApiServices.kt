@@ -1,4 +1,4 @@
-package com.fitriadyaa.storyapp.data.remote
+package com.fitriadyaa.storyapp.data.remote.retrofit
 
 import com.fitriadyaa.storyapp.data.remote.response.authResponse.LoginResponse
 import com.fitriadyaa.storyapp.data.remote.response.authResponse.RegisterResponse
@@ -28,11 +28,6 @@ interface ApiServices {
     suspend fun getStories(
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): StoryResponse
-
-    @GET("stories")
-    suspend fun getStoriesWithLocation(
-        @Query("location") location: Int
     ): StoryResponse
 
     @Multipart

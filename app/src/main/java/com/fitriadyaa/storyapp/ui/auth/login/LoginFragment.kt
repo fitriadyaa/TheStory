@@ -52,7 +52,7 @@ class LoginFragment : Fragment() {
 
             // Check if any of the fields are empty
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Harap isi semua kolom", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getString(R.string.warning_fill), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -62,8 +62,8 @@ class LoginFragment : Fragment() {
             loginViewModel.login(email, password).observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Result.Loading -> showLoading(true)
-                    is Result.Success -> {
-                        result.data?.let { processLogin(it) }
+                    is Result.Success<LoginResponse> -> {
+                        processLogin(result.data)
                         showLoading(false)
                     }
                     is Result.Error -> {
@@ -73,6 +73,7 @@ class LoginFragment : Fragment() {
                     else -> {}
                 }
             }
+
         }
 
         val isFromRegister: Boolean? = arguments?.getBoolean("is_form_register")

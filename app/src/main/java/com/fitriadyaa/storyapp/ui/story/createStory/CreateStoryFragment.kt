@@ -32,11 +32,12 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import androidx.core.content.FileProvider
+import com.fitriadyaa.storyapp.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.math.roundToInt
 
-@Suppress("DEPRECATION")
 class CreateStoryFragment : Fragment() {
     private var _binding: FragmentCreateStoryBinding? = null
     private val binding get() = _binding!!
@@ -116,7 +117,7 @@ class CreateStoryFragment : Fragment() {
             uploadImage()
         }
 
-        val fileUri = arguments?.get("selected_image") as? Uri
+        @Suppress("DEPRECATION") val fileUri = arguments?.get("selected_image") as? Uri
         if (fileUri != null) {
             val isBackCamera = arguments?.getBoolean("isBackCamera") ?: false
             val result = rotateBitmap(
@@ -177,12 +178,13 @@ class CreateStoryFragment : Fragment() {
                         }
                     }
                 }
+
             } else {
-                Toast.makeText(requireContext(), "Maaf, text deskripsi harus diisi.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.warning_text), Toast.LENGTH_SHORT).show()
                 showLoading(false)
             }
         } ?: run {
-            Toast.makeText(requireContext(), "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.warning_image), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -202,7 +204,7 @@ class CreateStoryFragment : Fragment() {
 
     private fun rotateBitmap(bitmap: Bitmap, isBackCamera: Boolean): Bitmap {
         val matrix = Matrix()
-        matrix.postRotate(if (isBackCamera) 0F else 180F) // Adjust the rotation angle if needed
+        matrix.postRotate(if (isBackCamera) 0F else 180F)
 
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
@@ -212,14 +214,13 @@ class CreateStoryFragment : Fragment() {
         options.inJustDecodeBounds = true
         BitmapFactory.decodeFile(file.absolutePath, options)
 
-        // Set your desired max width and height
         val reqWidth = 720
         val reqHeight = 1280
 
         var inSampleSize = 1
         if (options.outHeight > reqHeight || options.outWidth > reqWidth) {
-            val heightRatio = Math.round(options.outHeight.toFloat() / reqHeight.toFloat())
-            val widthRatio = Math.round(options.outWidth.toFloat() / reqWidth.toFloat())
+            val heightRatio = (options.outHeight.toFloat() / reqHeight.toFloat()).roundToInt()
+            val widthRatio = (options.outWidth.toFloat() / reqWidth.toFloat()).roundToInt()
             inSampleSize = if (heightRatio < widthRatio) heightRatio else widthRatio
         }
 
@@ -260,7 +261,6 @@ class CreateStoryFragment : Fragment() {
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            // Handle the error or return null
             null
         } finally {
             cursor?.close()

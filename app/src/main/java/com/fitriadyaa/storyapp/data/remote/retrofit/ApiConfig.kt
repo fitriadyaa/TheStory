@@ -1,4 +1,4 @@
-package com.fitriadyaa.storyapp.data.remote
+package com.fitriadyaa.storyapp.data.remote.retrofit
 
 import android.content.Context
 import com.fitriadyaa.storyapp.data.remote.response.AuthInterceptor

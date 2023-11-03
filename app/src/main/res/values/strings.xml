@@ -4,12 +4,12 @@
 
 
     //login and register
-    <string name="login_here">Login Here</string>
+    <string name="login_here">Login to continue</string>
     <string name="btn_login">Login</string>
     <string name="email">Email</string>
     <string name="invalid_email">Invalid email address please submit the valid email format</string>
     <string name="password">Password</string>
-    <string name="invalid_password">Passwords must be at least 6 characters</string>
+    <string name="invalid_password">Passwords must be at least 8 characters</string>
     <string name="not_account">Didn\'t have account?</string>
     <string name="have_account">Have account?</string>
     <string name="register">Register Here</string>
@@ -26,4 +26,12 @@
     <string name="camera">Camera</string>
     <string name="image">Image</string>
     <string name="upload">Upload</string>
+    <string name="warning_fill">Please fill in all fields!</string>
+    <string name="warning_image">Please insert the image file first</string>
+    <string name="warning_text">Please fill in the description text first</string>
+    <string name="permission">Permission not granted</string>
+    <string name="data_success">Data loaded successfully</string>
+    <string name="data_error">Failed to load data: </string>
+    <string name="data_loading">Loading data...</string>
+
 </resources>

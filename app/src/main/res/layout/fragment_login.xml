@@ -8,17 +8,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.login.LoginFragment">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/iv_logo"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginStart="32dp"-->
-<!--        android:layout_marginEnd="32dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/guide_line1"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/guide_line2"-->
-<!--        app:srcCompat="@drawable/bangkit_pic"/>-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_centerInParent="true"
+        app:lottie_rawRes="@raw/logo"
+        tools:ignore="MissingConstraints">
+    </com.airbnb.lottie.LottieAnimationView>
 
     <ProgressBar
         android:id="@+id/progress_bar"

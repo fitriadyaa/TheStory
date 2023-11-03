@@ -30,10 +30,10 @@ class EmailCustomView : AppCompatEditText {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(s!!).matches()) {
-                    error = context.getString(R.string.invalid_email)
+                error = if (!android.util.Patterns.EMAIL_ADDRESS.matcher(s!!).matches()) {
+                    context.getString(R.string.invalid_email)
                 } else {
-                    error = null // Clear the error message when the email is valid
+                    null
                 }
             }
 

@@ -33,10 +33,10 @@ class PasswordCustomView : AppCompatEditText {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s?.length!! < 8) {
-                    error = getContext().getString(R.string.invalid_password)
+                error = if (s?.length!! < 8) {
+                    context.getString(R.string.invalid_password)
                 } else {
-                    error = null // Clear the error message when the password is valid
+                    null
                 }
             }
 

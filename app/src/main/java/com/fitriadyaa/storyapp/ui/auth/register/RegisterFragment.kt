@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -52,14 +51,14 @@ class RegisterFragment : Fragment() {
 
             // Check if any of the fields are empty
             if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Harap isi semua kolom", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getString(R.string.warning_fill), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(requireView().windowToken, 0)
 
-            registerViewModel.register(name, email, password).observe(viewLifecycleOwner) { result ->
+            registerViewModel.register(name, email, password).observe(viewLifecycleOwner) { result: Result<RegisterResponse> ->
                 when (result) {
                     is Result.Loading -> showLoading(true)
                     is Result.Success -> {
@@ -72,6 +71,7 @@ class RegisterFragment : Fragment() {
                     }
                 }
             }
+
         }
 
     }

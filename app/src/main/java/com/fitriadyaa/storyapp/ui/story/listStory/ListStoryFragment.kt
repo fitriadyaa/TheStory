@@ -1,8 +1,8 @@
 package com.fitriadyaa.storyapp.ui.story.listStory
 
-import ListStoryViewModel
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +47,7 @@ class ListStoryFragment : Fragment() {
             }
         }
 
-        listStoryViewModel.fetchStories(1, 10)
+        listStoryViewModel.fetchStories(1, 10, requireContext())
 
         setupAdapter()
         binding.fabAdd.setOnClickListener {
@@ -70,7 +70,7 @@ class ListStoryFragment : Fragment() {
                 photoUrl = story.photoUrl,
                 createdAt = story.createdAt
             )
-
+            Log.d("ListStoryFragment", "CreatedAt: ${story.createdAt}")
             findNavController().navigate(action)
         }
 

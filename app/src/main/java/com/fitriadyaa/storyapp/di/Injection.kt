@@ -1,8 +1,8 @@
 package com.fitriadyaa.storyapp.di
 
-import RepositoryStory
 import android.content.Context
-import com.fitriadyaa.storyapp.data.remote.ApiConfig
+import com.fitriadyaa.storyapp.data.RepositoryStory
+import com.fitriadyaa.storyapp.data.remote.retrofit.ApiConfig
 import kotlinx.coroutines.runBlocking
 
 object Injection {

@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class StoryAdapter(
-    private val callback: (story: Story, imageView: View, nameView: View, descView: View, createView : View) -> Unit
+    private val callback: (story: Story, imageView: View, nameView: View, descView: View, createAtView : View) -> Unit
 ) : ListAdapter<Story, StoriesViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoriesViewHolder {
@@ -43,21 +43,20 @@ class StoriesViewHolder(private val binding: CardItemBinding) :
 
     fun bind(
         item: Story?,
-        callback: (story: Story, imageView: View, nameView: View, descView: View, createView: View) -> Unit
+        callback: (story: Story, imageView: View, nameView: View, descView: View, createAtView: View) -> Unit
     ) {
         item?.let { story ->
             binding.tvTitle.text = story.name
             binding.tvDesc.text = story.description
 
             val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
-            var formattedDate = "Invalid Date" // Set a default value for the date
+            var formattedDate = "Invalid Date"
 
-            // Check if the createdAt field is not null and in the expected format
-            if (!story.createdAt.isNullOrBlank()) {
+            if (story.createdAt.isNotBlank()) {
                 try {
                     val date =
                         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(story.createdAt)
-                    formattedDate = dateFormat.format(date)
+                    formattedDate = date?.let { dateFormat.format(it) }.toString()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

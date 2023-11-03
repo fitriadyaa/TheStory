@@ -4,12 +4,12 @@
     <string name="app_name">StoryApp</string>
 
     //login and register
-    <string name="login_here">Masuk</string>
+    <string name="login_here">Masuk untuk melanjutkan!</string>
     <string name="btn_login">Masuk</string>
     <string name="email">Email</string>
     <string name="invalid_email">Email yang anda masukan salah</string>
     <string name="password">Kata sandi</string>
-    <string name="invalid_password">Kata sandi harus lebih dari 6 karakter</string>
+    <string name="invalid_password">Kata sandi harus lebih dari 8 karakter</string>
     <string name="not_account">Belum punya akun?</string>
     <string name="have_account">Sudah punya akun?</string>
     <string name="register">Daftar Disini</string>
@@ -26,4 +26,11 @@
     <string name="camera">Kamera</string>
     <string name="image">Gambar</string>
     <string name="upload">Unggah</string>
+    <string name="warning_fill">Harap isi semua kolom!</string>
+    <string name="warning_image">Silakan masukkan berkas gambar terlebih dahulu</string>
+    <string name="warning_text">Silahkan isi teks deskripsi terlebih dahulu</string>
+    <string name="permission">Izin tidak diberikan</string>
+    <string name="data_success">Data berhasil dimuat</string>
+    <string name="data_error">Gagal memuat data: </string>
+    <string name="data_loading">Memuat data...</string>
 </resources>

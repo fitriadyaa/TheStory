@@ -1,13 +1,14 @@
+package com.fitriadyaa.storyapp.data
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.fitriadyaa.storyapp.data.remote.ApiServices
+import com.fitriadyaa.storyapp.data.remote.retrofit.ApiServices
 import com.fitriadyaa.storyapp.data.remote.response.authResponse.LoginResponse
 import com.fitriadyaa.storyapp.data.remote.response.authResponse.RegisterResponse
 import com.fitriadyaa.storyapp.data.remote.response.storyResponse.StoryPostResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import com.fitriadyaa.storyapp.data.Result
 import com.fitriadyaa.storyapp.data.remote.response.storyResponse.StoryResponse
 
 class RepositoryStory(private val apiService: ApiServices) {
