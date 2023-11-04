@@ -28,7 +28,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_story"
-            android:layout_width="325dp"
+            android:layout_width="0dp"
             android:layout_height="247dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
@@ -93,7 +93,7 @@
 
         <Button
             android:id="@+id/btn_show_direction"
-            android:layout_width="156dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="@android:color/holo_purple"

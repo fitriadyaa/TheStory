@@ -38,8 +38,6 @@ class ListStoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
 
-        binding.progressBar.visibility = View.VISIBLE
-
         listStoryViewModel.stories.observe(viewLifecycleOwner) { data ->
             if (data != null) {
                 adapter.submitData(viewLifecycleOwner.lifecycle , data)

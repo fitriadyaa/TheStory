@@ -67,9 +67,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         ViewModelFactory(this)
     }
 
-    private var currentLatitude: Double? = null
-    private var currentLongitude: Double? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)

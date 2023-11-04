@@ -13,6 +13,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Suppress("DEPRECATION")
 class DetailStoryFragment : Fragment() {
 
     private var _binding: FragmentDetailStoryBinding? = null

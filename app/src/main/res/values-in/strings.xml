@@ -37,4 +37,5 @@
     <string name="settings">Pengaturan</string>
     <string name="title_activity_maps">Maps</string>
     <string name="location_not_found">Lokasi tidak ditemukan. Coba Lagi!</string>
+    <string name="share_location">Bagikan Lokasi Anda?</string>
 </resources>

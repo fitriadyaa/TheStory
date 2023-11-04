@@ -37,5 +37,7 @@
     <string name="settings">Settings</string>
     <string name="title_activity_maps">Maps</string>
     <string name="location_not_found">Location is not found. Try Again</string>
+    <string name="share_location">Share your location?</string>
+
 
 </resources>

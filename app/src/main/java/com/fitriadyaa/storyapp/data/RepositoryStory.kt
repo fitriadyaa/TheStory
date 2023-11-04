@@ -15,6 +15,7 @@ import com.fitriadyaa.storyapp.data.remote.response.storyResponse.StoryPostRespo
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import com.fitriadyaa.storyapp.data.remote.response.storyResponse.StoryResponse
+import kotlinx.coroutines.Dispatchers
 
 class RepositoryStory(private val apiService: ApiServices) {
 
@@ -40,16 +41,23 @@ class RepositoryStory(private val apiService: ApiServices) {
         ).liveData
     }
 
-    fun postStory(file: MultipartBody.Part, description: RequestBody): LiveData<Result<StoryPostResponse>> = liveData {
+    fun postStory(
+        file: MultipartBody.Part,
+        description: RequestBody,
+        lon: Double?,
+        lat: Double?
+    ): LiveData<Result<StoryPostResponse>> = liveData(Dispatchers.IO) {
         emit(Result.Loading)
         try {
-            val response = apiService.postStory(file, description)
+            val response = apiService.postStory(file, description, lon, lat)
             emit(Result.Success(response))
         } catch (e: Exception) {
             Log.e("StoryRepository", "postStory: ${e.message.toString()}")
             emit(Result.Error(e.message.toString()))
         }
     }
+
+
 
     fun postSignUp(name: String, email: String, password: String): LiveData<Result<RegisterResponse>> = liveData {
         emit(Result.Loading)

@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.story.listStory.ListStoryFragment">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:visibility="gone"
-        app:layout_anchor="@id/rv_story"
-        app:layout_anchorGravity="center" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"

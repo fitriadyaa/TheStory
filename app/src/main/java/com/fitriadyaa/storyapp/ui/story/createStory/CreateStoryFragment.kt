@@ -31,6 +31,8 @@ import android.graphics.Matrix
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.util.Log
+import android.widget.CheckBox
 import androidx.core.content.FileProvider
 import com.fitriadyaa.storyapp.R
 import java.text.SimpleDateFormat
@@ -95,15 +97,31 @@ class CreateStoryFragment : Fragment() {
         }
     }
 
+    private lateinit var locationProvider: LocationProvider
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        locationProvider = LocationProvider(requireContext())
 
         outputDirectory = File.createTempFile(
             "JPEG_${SimpleDateFormat("yyyyMMdd_HHmm-ss", Locale.getDefault()).format(Date())}_",
             ".jpg",
             requireContext().cacheDir
         )
+
+        val checkbox = view.findViewById<CheckBox>(R.id.checkbox)
+
+        checkbox?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                context?.let {
+                    locationProvider = LocationProvider(it)
+                    getLocation()
+                }
+            } else {
+                locationProvider = LocationProvider(requireContext())
+            }
+        }
 
         binding.btnCamera.setOnClickListener {
             dispatchTakePictureIntent()
@@ -126,6 +144,26 @@ class CreateStoryFragment : Fragment() {
             )
             binding.ivStory.setImageBitmap(result)
             getFile = fileUri.toFile()
+        }
+    }
+
+    private var lat: Double? = null
+    private var lon: Double? = null
+
+    private fun getLocation() {
+        context?.let { context ->
+            locationProvider.getLocation { location ->
+                activity?.runOnUiThread {
+                    lat = location.latitude
+                    lon = location.longitude
+                    Log.d("Location", "Latitude: $lat, Longitude: $lon")
+                    Toast.makeText(
+                        context,
+                        "Location: $lat, $lon",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
@@ -164,7 +202,11 @@ class CreateStoryFragment : Fragment() {
                     requestImageFile
                 )
 
-                createStoryViewModel.postStory(imageMultipart, description).observe(viewLifecycleOwner) { result ->
+                val lat = this.lat ?: 0.0
+                val lon = this.lon ?: 0.0
+
+
+                createStoryViewModel.postStory(imageMultipart, description, lon, lat ).observe(viewLifecycleOwner) { result ->
                     when (result) {
                         is Result.Success -> {
                             showLoading(false)
