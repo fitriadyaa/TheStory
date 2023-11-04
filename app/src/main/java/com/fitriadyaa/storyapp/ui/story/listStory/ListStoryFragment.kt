@@ -41,19 +41,21 @@ class ListStoryFragment : Fragment() {
         binding.progressBar.visibility = View.VISIBLE
 
         listStoryViewModel.stories.observe(viewLifecycleOwner) { data ->
-            binding.progressBar.visibility = View.GONE
             if (data != null) {
-                adapter.submitList(data)
+                adapter.submitData(viewLifecycleOwner.lifecycle , data)
             }
         }
-
-        listStoryViewModel.fetchStories(1, 10, requireContext())
 
         setupAdapter()
         binding.fabAdd.setOnClickListener {
             findNavController().navigate(R.id.createStoryFragment)
         }
         onBackPressed()
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            adapter.refresh()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
 

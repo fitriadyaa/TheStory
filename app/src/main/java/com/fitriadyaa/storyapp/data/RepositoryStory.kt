@@ -3,9 +3,14 @@ package com.fitriadyaa.storyapp.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.fitriadyaa.storyapp.data.remote.retrofit.ApiServices
 import com.fitriadyaa.storyapp.data.remote.response.authResponse.LoginResponse
 import com.fitriadyaa.storyapp.data.remote.response.authResponse.RegisterResponse
+import com.fitriadyaa.storyapp.data.remote.response.storyResponse.Story
 import com.fitriadyaa.storyapp.data.remote.response.storyResponse.StoryPostResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -13,15 +18,26 @@ import com.fitriadyaa.storyapp.data.remote.response.storyResponse.StoryResponse
 
 class RepositoryStory(private val apiService: ApiServices) {
 
-    fun getStories(page: Int, size: Int): LiveData<Result<StoryResponse>> = liveData {
-        emit(Result.Loading)
+    fun getStoriesWithLocation(): LiveData<Result<StoryResponse>> = liveData {
+        emit(Result.Loading) // Ensure Result.Loading is properly referenced
         try {
-            val response = apiService.getStories(page, size)
+            val response = apiService.getStoriesWithLocation(1)
             emit(Result.Success(response))
         } catch (e: Exception) {
-            Log.e("StoryRepository", "getStories: ${e.message.toString()}")
+            Log.d("ListStoryViewModel", "getStoriesWithLocation: ${e.message.toString()} ")
             emit(Result.Error(e.message.toString()))
         }
+    }
+
+    fun getStories(): LiveData<PagingData<Story>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPaging(apiService)
+            }
+        ).liveData
     }
 
     fun postStory(file: MultipartBody.Part, description: RequestBody): LiveData<Result<StoryPostResponse>> = liveData {

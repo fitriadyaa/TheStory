@@ -3,28 +3,39 @@ package com.fitriadyaa.storyapp.ui.story.listStory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import com.fitriadyaa.storyapp.databinding.CardItemBinding
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import coil.load
 import com.fitriadyaa.storyapp.data.remote.response.storyResponse.Story
-import com.fitriadyaa.storyapp.databinding.CardItemBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class StoryAdapter(
-    private val callback: (story: Story, imageView: View, nameView: View, descView: View, createAtView : View) -> Unit
-) : ListAdapter<Story, StoriesViewHolder>(DIFF_CALLBACK) {
-
+class StoryAdapter(private val callback: (story: Story, imageView: View, nameView: View, descView: View, createAtView: View) -> Unit)
+    : PagingDataAdapter<Story, StoriesViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoriesViewHolder {
-        val binding = CardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return StoriesViewHolder(binding)
+        val view = CardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return StoriesViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: StoriesViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, callback)
+        holder.binding.root.setOnClickListener{
+            if (item != null) {
+                callback.invoke(
+                    item,
+                    holder.binding.ivStory,
+                    holder.binding.tvTitle,
+                    holder.binding.tvDesc,
+                    holder.binding.tvDate
+                )
+            }
+        }
+        if (item != null) {
+            holder.bind(item, callback)
+        }
     }
 
     companion object {
@@ -38,7 +49,7 @@ class StoryAdapter(
     }
 }
 
-class StoriesViewHolder(private val binding: CardItemBinding) :
+class StoriesViewHolder( val binding: CardItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(

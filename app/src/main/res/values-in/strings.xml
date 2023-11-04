@@ -33,4 +33,8 @@
     <string name="data_success">Data berhasil dimuat</string>
     <string name="data_error">Gagal memuat data: </string>
     <string name="data_loading">Memuat data...</string>
+    <string name="maps">Lokasi</string>
+    <string name="settings">Pengaturan</string>
+    <string name="title_activity_maps">Maps</string>
+    <string name="location_not_found">Lokasi tidak ditemukan. Coba Lagi!</string>
 </resources>

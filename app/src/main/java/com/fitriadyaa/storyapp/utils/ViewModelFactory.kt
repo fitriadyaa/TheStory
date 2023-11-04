@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.fitriadyaa.storyapp.di.Injection
 import com.fitriadyaa.storyapp.ui.auth.login.LoginViewModel
 import com.fitriadyaa.storyapp.ui.auth.register.RegisterViewModel
+import com.fitriadyaa.storyapp.ui.maps.MapsViewModel
 import com.fitriadyaa.storyapp.ui.story.createStory.CreateStoryViewModel
 import com.fitriadyaa.storyapp.ui.story.listStory.ListStoryViewModel
 
@@ -25,6 +26,9 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(Injection.provideRepository(context)) as T
+            }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(Injection.provideRepository(context)) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel Class")
         }

@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.fitriadyaa.storyapp.R
 import com.fitriadyaa.storyapp.databinding.ActivityMainBinding
 import com.fitriadyaa.storyapp.ui.auth.AuthActivity
+import com.fitriadyaa.storyapp.ui.maps.MapsActivity
 import com.fitriadyaa.storyapp.utils.Preference
 
 class MainActivity : AppCompatActivity() {
@@ -73,6 +74,10 @@ class MainActivity : AppCompatActivity() {
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 finish()
+            }
+            R.id.action_map -> {
+                val intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
