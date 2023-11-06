@@ -13,6 +13,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -24,7 +25,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import java.io.File
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
-import org.junit.Assert.assertEquals
+import org.junit.jupiter.api.Assertions
 
 
 @RunWith(MockitoJUnitRunner::class)
@@ -57,14 +58,22 @@ class CreateStoryViewModelTest{
         val expectedPostResponse = MutableLiveData<Result<StoryPostResponse>>()
         expectedPostResponse.value = Result.Success(dummyResponse)
 
-        Mockito.`when`(repositoryStory.postStory(imageMultipart, description)).thenReturn(expectedPostResponse)
+        Mockito.`when`(repositoryStory.postStory(imageMultipart, description, 0.0, 0.0))
+            .thenReturn(expectedPostResponse)
 
-        val actualResponse = createStoryViewModel.postStory(imageMultipart, description).getOrAwaitValue()
+        val actualResponse = createStoryViewModel.postStory(imageMultipart, description, 0.0, 0.0).getOrAwaitValue()
 
-        Mockito.verify(repositoryStory).postStory(imageMultipart, description)
-        assertNotNull(actualResponse)
-        assertTrue(actualResponse is Result.Success)
-        assertEquals(dummyResponse.error, (actualResponse as Result.Success).data.error)
+        Mockito.verify(repositoryStory).postStory(imageMultipart, description, 0.0, 0.0)
+        Assertions.assertNotNull(actualResponse)
+        Assertions.assertTrue(actualResponse is Result.Success)
+        Assertions.assertEquals(dummyResponse.error, (actualResponse as Result.Success).data.error)
+
+        // Check if data is null
+        if (actualResponse is Result.Success) {
+            Assertions.assertFalse(actualResponse.data == null)
+        } else {
+            Assert.assertFalse(actualResponse == null)
+        }
     }
 
     @Test
@@ -81,11 +90,11 @@ class CreateStoryViewModelTest{
         val expectedPostResponse = MutableLiveData<Result<StoryPostResponse>>()
         expectedPostResponse.value = Result.Error("network error")
 
-        Mockito.`when`(repositoryStory.postStory(imageMultipart, description)).thenReturn(expectedPostResponse)
+        Mockito.`when`(repositoryStory.postStory(imageMultipart, description, 0.0, 0.0)).thenReturn(expectedPostResponse)
 
-        val actualResponse = createStoryViewModel.postStory(imageMultipart, description).getOrAwaitValue()
+        val actualResponse = createStoryViewModel.postStory(imageMultipart, description, 0.0, 0.0).getOrAwaitValue()
 
-        Mockito.verify(repositoryStory).postStory(imageMultipart, description)
+        Mockito.verify(repositoryStory).postStory(imageMultipart, description, 0.0, 0.0)
         assertNotNull(actualResponse)
         assertTrue(actualResponse is Result.Error)
     }
