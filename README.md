@@ -32,4 +32,8 @@ This repository serves as a comprehensive documentation of my progress and the f
 
 Feel free to explore the codebase and dive into the journey! Your feedback and contributions are always welcome. Happy coding! 🚀📱
 
----
+## Support Me ☕
+
+If you find MyGithubUser helpful or just want to support my work, you can buy me a coffee! ☕
+
+[![Support Me on Saweria](https://img.shields.io/badge/Support%20Me%20on-Saweria-brightgreen)](https://saweria.co/fitriadyaa)
